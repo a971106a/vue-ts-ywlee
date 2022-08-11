@@ -2,7 +2,7 @@
   <div>
     <label for="todo-input" />
     <input id="todo-input" type="text" :value="item" @input="handleInput" />
-    <button @click="addTodo" type="button">add</button>
+    <button @click="addTodo" type="button">추가</button>
   </div>
 </template>
 
@@ -13,15 +13,16 @@ export default Vue.extend({
   props: {
     item: {
       type: String,
-      default: '',
+      required: true,
     },
   },
   methods: {
-    handleInput(event: any) {
-      this.$emit('input', event.target.value)
+    handleInput(event: InputEvent) {
+      const eventTarget = event.target as HTMLInputElement
+      this.$emit('input', eventTarget.value)
     },
     addTodo() {
-      console.log('🤩🤩🤩 영우의 로그 : ', 'add')
+      this.$emit('add')
     },
   },
 })
